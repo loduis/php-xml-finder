@@ -1,5 +1,7 @@
 {
     "name": "loduis/xml-finder",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Loduis Madariaga",
