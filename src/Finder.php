@@ -40,20 +40,6 @@ class Finder
 
     public function all(string $selector)
     {
-        /*
-        $entries = [];
-        $namespaces = $this->namespaces;
-        foreach (explode('/', $selector) as $part) {
-            if (strpos($part, ':') !== false) {
-                [$prefix, $name] = explode(':', $part);
-                if ($nameUri = ($namespaces[$prefix] ?? false)) {
-                    $part = "*[local-name(.)=\"$name\" and namespace-uri(.)=\"$nameUri\"]";
-                }
-            }
-            $entries[] = $part;
-        }
-        $selector = implode('/', $entries);
-        */
         $nodes = [];
         $result = $this->xpath->query($selector, $this->node);
         foreach ($result as $node) {
