@@ -1,0 +1,23 @@
+{
+    "name": "loduis/xml-finder",
+    "authors": [
+        {
+            "name": "Loduis Madariaga",
+            "email": "loduis@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "XML\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "XML\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "loduis/xml-tests": "dev-master"
+    },
+    "minimum-stability": "dev"
+}
