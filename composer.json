@@ -19,7 +19,11 @@
         }
     },
     "require-dev": {
-        "loduis/xml-tests": "dev-master"
+        "loduis/xml-tests": "master"
     },
+    "config": {
+        "sort-packages": true
+    },
+    "prefer-stable": true,
     "minimum-stability": "dev"
 }
