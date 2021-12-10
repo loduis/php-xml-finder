@@ -5,12 +5,9 @@ namespace XML;
 use DOMNode;
 use DOMXPath;
 use DOMDocument;
-use SimpleXMLElement;
 
 class Finder
 {
-    private $namespaces = [];
-
     private $xpath;
 
     private $node;
@@ -85,6 +82,11 @@ class Finder
     public function first(string $selector)
     {
         return $this->all($selector)[0];
+    }
+
+    public function c14n(string $selector, ...$options)
+    {
+        return $this->first($selector)->C14N(...$options);
     }
 
     public function new ($node, $namespaces = []): Finder
