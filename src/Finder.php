@@ -12,7 +12,7 @@ class Finder
 
     private $node;
 
-    public function __construct ($node, array $namespaces = [])
+    public function __construct($node, array $namespaces = [])
     {
         if (!($node instanceof DOMNode)) {
             $doc = new DOMDocument;
@@ -35,7 +35,7 @@ class Finder
         return new Finder($node, $namespaces);
     }
 
-    public function all(string $selector)
+    public function all(string $selector): iterable
     {
         $nodes = [];
         $result = $this->xpath->query($selector, $this->node);
@@ -69,7 +69,7 @@ class Finder
         return null;
     }
 
-    public function bool (string $selector): ?bool
+    public function bool(string $selector): ?bool
     {
       $value = $this->text($selector);
       if ($value !== null) {
@@ -79,20 +79,26 @@ class Finder
       return null;
     }
 
-    public function first(string $selector)
+    public function first(string $selector): ?DOMNode
     {
-        return $this->all($selector)[0];
+        return $this->all($selector)[0] ?? null;
     }
 
-    public function c14n(string $selector, ...$options)
+    public function c14n(string $selector, ...$options): ?string
     {
-        return $this->first($selector)->C14N(...$options);
+        $node = $this->first($selector);
+
+        return $node === null ? null : $node->C14N(...$options);
     }
 
-    public function new ($node, $namespaces = []): Finder
+    public function new($node, $namespaces = []): ?Finder
     {
         if (is_string($node)) {
             $node = $this->first($node);
+        }
+
+        if ($node === null) {
+            return null;
         }
 
         return Finder::create($node, $namespaces);
