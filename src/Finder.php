@@ -46,17 +46,28 @@ class Finder
         return $nodes;
     }
 
-    public function number(string $selector): int
+    public function number(string $selector): ?int
     {
         $value = $this->text($selector);
-        if ($value !== null) {
-            return (int) $value;
-        }
 
-        return null;
+        return $value === null ? null : (int) $value;
     }
 
-    public function text(string $selector)
+    public function int(string $selector): ?int
+    {
+        $value = $this->text($selector);
+
+        return $value === null ? null : (int) $value;
+    }
+
+    public function float(string $selector): ?float
+    {
+        $value = $this->text($selector);
+
+        return $value === null ? null : (float) $value;
+    }
+
+    public function text(string $selector): ?string
     {
         if (strpos($selector, '@') === false) {
             $selector .= '/text()';
@@ -72,11 +83,8 @@ class Finder
     public function bool(string $selector): ?bool
     {
       $value = $this->text($selector);
-      if ($value !== null) {
-        return $value === 'true' ? true : false;
-      }
 
-      return null;
+      return $value === null ? null : ($value === 'true' ? true : false);
     }
 
     public function first(string $selector): ?DOMNode
@@ -97,10 +105,6 @@ class Finder
             $node = $this->first($node);
         }
 
-        if ($node === null) {
-            return null;
-        }
-
-        return Finder::create($node, $namespaces);
+        return $node === null ? null : Finder::create($node, $namespaces);
     }
 }
