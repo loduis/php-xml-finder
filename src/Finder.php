@@ -16,7 +16,11 @@ class Finder
     {
         if (!($node instanceof DOMNode)) {
             $doc = new DOMDocument;
-            $doc->loadXML($node);
+            if (stripos($node, '</html>') !== false) {
+                $doc->loadHTML($node);
+            } else {
+                $doc->loadXML($node);
+            }
             $node = $doc;
         }
         $doc = $node;
