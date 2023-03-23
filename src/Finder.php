@@ -34,9 +34,9 @@ class Finder
         }
     }
 
-    public static function create($node, array $namespaces = []): Finder
+    public static function create($node, array $namespaces = []): self
     {
-        return new Finder($node, $namespaces);
+        return new static($node, $namespaces);
     }
 
     public function all(string $selector): iterable
@@ -103,12 +103,12 @@ class Finder
         return $node === null ? null : $node->C14N(...$options);
     }
 
-    public function new($node, $namespaces = []): ?Finder
+    public function new($node, $namespaces = []): ?self
     {
         if (is_string($node)) {
             $node = $this->first($node);
         }
 
-        return $node === null ? null : Finder::create($node, $namespaces);
+        return $node === null ? null : static::create($node, $namespaces);
     }
 }
