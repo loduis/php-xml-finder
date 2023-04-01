@@ -10,7 +10,7 @@ class Finder
 {
     private $xpath;
 
-    private $node;
+    protected $node;
 
     public function __construct($node, array $namespaces = [])
     {
